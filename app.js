@@ -1,22 +1,15 @@
-// ========================================
-//   NUTRITRACK — app.js
-// ========================================
-
-// ---- State ----
 const TODAY = new Date().toISOString().slice(0, 10);
 
 const defaultGoals = {
   calories: 2000, protein: 60, carbs: 250,
   fat: 65, fiber: 30, water: 8
 };
-
 let state = {
   goals: { ...defaultGoals },
   entries: [],   // today's food entries
   waterLog: [],  // today's water logs
   history: {}    // past days: { "YYYY-MM-DD": { totals, entries, water } }
 };
-
 // ---- Food Database ----
 const FOOD_DB = [
   { name: "Apple (medium)", cal: 95,  pro: 0.5, carb: 25, fat: 0.3, fiber: 4.4, vitC: 8.4, calcium: 11,  iron: 0.2, sodium: 2,   potassium: 195, vitD: 0 },
@@ -56,8 +49,6 @@ const TIPS = [
   "⚡ Low on iron? Try pairing plant-based iron with Vitamin C for better absorption.",
   "🫀 Potassium helps regulate blood pressure — bananas, spinach & beans are great.",
 ];
-
-// ---- Init ----
 function init() {
   loadState();
   setHeaderDate();
@@ -70,8 +61,6 @@ function init() {
   renderEntries();
   renderWaterLog();
 }
-
-// ---- Load / Save ----
 function loadState() {
   try {
     const saved = localStorage.getItem('nutritrack');
@@ -93,7 +82,6 @@ function loadState() {
       state.lastDate = TODAY;
       saveState();
     }
-    // Load goals form
     document.getElementById('goalCalories').value = state.goals.calories;
     document.getElementById('goalProtein').value  = state.goals.protein;
     document.getElementById('goalCarbs').value    = state.goals.carbs;
@@ -117,15 +105,11 @@ function archiveDay(date) {
     waterLog: [...state.waterLog]
   };
 }
-
-// ---- Date ----
 function setHeaderDate() {
   const el = document.getElementById('headerDate');
   const d = new Date();
   el.textContent = d.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
 }
-
-// ---- Tabs ----
 function setupTabs() {
   const btns  = document.querySelectorAll('.nav-btn');
   const panels = document.querySelectorAll('.tab-panel');
@@ -140,8 +124,6 @@ function setupTabs() {
     });
   });
 }
-
-// ---- Totals ----
 function calcTotals() {
   return state.entries.reduce((acc, e) => {
     acc.calories  += e.cal || 0;
@@ -162,8 +144,6 @@ function calcTotals() {
 function calcWaterTotal() {
   return state.waterLog.reduce((s, w) => s + w.amount, 0);
 }
-
-// ---- Dashboard Update ----
 function updateDashboard() {
   const t = calcTotals();
   const g = state.goals;
