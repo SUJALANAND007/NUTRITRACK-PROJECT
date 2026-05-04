@@ -1,13 +1,3 @@
----
-title: NutriTrack – Daily Health Dashboard
-emoji: 🥦
-colorFrom: green
-colorTo: blue
-sdk: static
-app_file: index.html
-pinned: true
----
-
 # NutriTrack — Your Daily Health Dashboard
 
 A comprehensive, organic-modern health tracker built with Vanilla JavaScript, HTML5, and CSS3. NutriTrack allows users to monitor their nutrition, hydration, and long-term health trends through an interactive, data-driven interface.
