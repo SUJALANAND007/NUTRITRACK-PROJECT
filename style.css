@@ -1,8 +1,3 @@
-/* ========================================
-   NUTRITRACK — style.css
-   Aesthetic: Organic-Modern / Dark Earth
-   ======================================== */
-
 /* ---- CSS Variables ---- */
 :root {
   --bg:          #0f1115;
@@ -12,21 +7,18 @@
   --text:        #e8e4dc;
   --text-muted:  #7a8099;
   --text-dim:    #4a5068;
-
   --accent-cal:  #f4845f;
   --accent-pro:  #5bba8f;
   --accent-carb: #f2c85b;
   --accent-fat:  #c084fc;
   --accent-fiber:#60c9d4;
   --accent-water:#4da6ff;
-
   --micro-a:     #ff8a65;
   --micro-b:     #4db6ac;
   --micro-c:     #ef5350;
   --micro-d:     #ab8bff;
   --micro-e:     #66bb6a;
   --micro-f:     #ffd54f;
-
   --radius:      14px;
   --radius-sm:   8px;
   --shadow:      0 4px 30px rgba(0,0,0,0.4);
@@ -34,12 +26,8 @@
   --font-head:   'Syne', sans-serif;
   --font-body:   'DM Sans', sans-serif;
 }
-
-/* ---- Reset & Base ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   background: var(--bg);
   color: var(--text);
@@ -48,12 +36,10 @@ body {
   line-height: 1.6;
   min-height: 100vh;
 }
-
 /* ---- Scrollbar ---- */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
-
 /* ---- Header ---- */
 .header {
   position: sticky;
@@ -63,7 +49,6 @@ body {
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
 }
-
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -73,20 +58,17 @@ body {
   align-items: center;
   gap: 32px;
 }
-
 .logo {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
 }
-
 .logo-icon {
   font-size: 22px;
   color: var(--accent-pro);
   line-height: 1;
 }
-
 .logo-text {
   font-family: var(--font-head);
   font-weight: 800;
@@ -97,13 +79,11 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .nav {
   display: flex;
   gap: 4px;
   flex: 1;
 }
-
 .nav-btn {
   background: none;
   border: none;
@@ -116,39 +96,30 @@ body {
   cursor: pointer;
   transition: var(--transition);
 }
-
 .nav-btn:hover { color: var(--text); background: var(--bg-card); }
-
 .nav-btn.active {
   color: var(--bg);
   background: var(--accent-pro);
   font-weight: 600;
 }
-
 .header-date {
   font-size: 13px;
   color: var(--text-muted);
   flex-shrink: 0;
   font-family: var(--font-head);
 }
-
-/* ---- Main ---- */
 .main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 24px 80px;
 }
-
 /* ---- Tab Panels ---- */
 .tab-panel { display: none; animation: fadeUp 0.35s ease; }
 .tab-panel.active { display: block; }
-
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-/* ---- Section Title ---- */
 .section-title { margin-bottom: 36px; }
 .section-title h1 {
   font-family: var(--font-head);
@@ -158,15 +129,12 @@ body {
   line-height: 1.1;
 }
 .section-title p { color: var(--text-muted); margin-top: 6px; }
-
-/* ---- Cards Grid ---- */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 16px;
   margin-bottom: 40px;
 }
-
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -176,9 +144,7 @@ body {
   overflow: hidden;
   transition: var(--transition);
 }
-
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-
 .card-label {
   font-size: 11px;
   font-weight: 600;
@@ -187,21 +153,17 @@ body {
   color: var(--text-muted);
   margin-bottom: 8px;
 }
-
 .card-value {
   font-family: var(--font-head);
   font-size: 32px;
   font-weight: 800;
   line-height: 1;
 }
-
 .card-sub {
   font-size: 12px;
   color: var(--text-muted);
   margin-top: 4px;
 }
-
-/* Ring SVG */
 .ring-wrap {
   position: absolute;
   right: 12px;
@@ -211,36 +173,29 @@ body {
   height: 54px;
   opacity: 0.85;
 }
-
 .ring { width: 100%; height: 100%; transform: rotate(-90deg); }
-
 .ring-bg {
   fill: none;
   stroke: var(--border);
   stroke-width: 7;
 }
-
 .ring-fill {
   fill: none;
   stroke-width: 7;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.8s cubic-bezier(0.4,0,0.2,1);
 }
-
 .ring-fill--calories  { stroke: var(--accent-cal); }
 .ring-fill--protein   { stroke: var(--accent-pro); }
 .ring-fill--carbs     { stroke: var(--accent-carb); }
 .ring-fill--fat       { stroke: var(--accent-fat); }
 .ring-fill--fiber     { stroke: var(--accent-fiber); }
-
-/* Card accent borders */
 .card--calories  { border-top: 3px solid var(--accent-cal); }
 .card--protein   { border-top: 3px solid var(--accent-pro); }
 .card--carbs     { border-top: 3px solid var(--accent-carb); }
 .card--fat       { border-top: 3px solid var(--accent-fat); }
 .card--water     { border-top: 3px solid var(--accent-water); }
 .card--fiber     { border-top: 3px solid var(--accent-fiber); }
-
 /* Water card visual */
 .water-visual {
   position: absolute;
@@ -253,7 +208,6 @@ body {
   border-radius: 4px;
   overflow: hidden;
 }
-
 .water-fill {
   position: absolute;
   bottom: 0;
@@ -273,7 +227,6 @@ body {
   padding: 28px 24px;
   margin-bottom: 24px;
 }
-
 .macro-section h2,
 .micro-section h2,
 .goals-section h2,
@@ -289,7 +242,6 @@ body {
   margin-bottom: 18px;
   letter-spacing: -0.3px;
 }
-
 .macro-bar-wrap {
   background: var(--bg);
   border-radius: 99px;
@@ -297,14 +249,12 @@ body {
   overflow: hidden;
   margin-bottom: 14px;
 }
-
 .macro-bar {
   height: 100%;
   display: flex;
   gap: 2px;
   transition: var(--transition);
 }
-
 .macro-seg {
   height: 100%;
   display: flex;
@@ -314,12 +264,10 @@ body {
   transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
   border-radius: 99px;
 }
-
 .macro-seg span { font-size: 10px; font-weight: 700; color: var(--bg); white-space: nowrap; padding: 0 6px; }
 .macro-seg--protein { background: var(--accent-pro); }
 .macro-seg--carbs   { background: var(--accent-carb); }
 .macro-seg--fat     { background: var(--accent-fat); }
-
 .macro-legend {
   display: flex;
   gap: 20px;
@@ -327,7 +275,6 @@ body {
   color: var(--text-muted);
   align-items: center;
 }
-
 .legend-dot {
   width: 10px;
   height: 10px;
@@ -335,11 +282,9 @@ body {
   display: inline-block;
   margin-right: 6px;
 }
-
 .legend-dot--protein { background: var(--accent-pro); }
 .legend-dot--carbs   { background: var(--accent-carb); }
 .legend-dot--fat     { background: var(--accent-fat); }
-
 /* ---- Micronutrients ---- */
 .micro-section {
   background: var(--bg-card);
@@ -348,28 +293,23 @@ body {
   padding: 28px 24px;
   margin-bottom: 24px;
 }
-
 .micro-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 18px;
 }
-
 .micro-item { display: flex; flex-direction: column; gap: 6px; }
-
 .micro-label {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-muted);
 }
-
 .micro-bar-wrap {
   height: 8px;
   background: var(--border);
   border-radius: 99px;
   overflow: hidden;
 }
-
 .micro-fill {
   height: 100%;
   border-radius: 99px;
@@ -382,9 +322,7 @@ body {
 .micro-fill--d { background: var(--micro-d); }
 .micro-fill--e { background: var(--micro-e); }
 .micro-fill--f { background: var(--micro-f); }
-
 .micro-val { font-size: 12px; color: var(--text-dim); }
-
 /* ---- Health Tip ---- */
 .tip-section {
   display: flex;
@@ -396,10 +334,8 @@ body {
   padding: 20px 24px;
   margin-bottom: 24px;
 }
-
 .tip-icon { font-size: 24px; flex-shrink: 0; }
 .tip-text { font-size: 14px; color: var(--text); line-height: 1.6; }
-
 /* ---- Goals Section ---- */
 .goals-section {
   background: var(--bg-card);
@@ -408,7 +344,6 @@ body {
   padding: 28px 24px;
   margin-bottom: 24px;
 }
-
 .edit-goals-btn {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -421,14 +356,12 @@ body {
   transition: var(--transition);
 }
 .edit-goals-btn:hover { color: var(--text); border-color: var(--accent-pro); }
-
 .goals-inputs {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 14px;
   margin-bottom: 18px;
 }
-
 /* ---- Log Food ---- */
 .log-layout {
   display: grid;
@@ -436,7 +369,6 @@ body {
   gap: 24px;
   margin-bottom: 36px;
 }
-
 @media (max-width: 768px) {
   .log-layout { grid-template-columns: 1fr; }
 }
