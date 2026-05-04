@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriTrack — Your Daily Health Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">NutriTrack</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="nav-btn" data-tab="log">Log Food</button>
+        <button class="nav-btn" data-tab="water">Water</button>
+        <button class="nav-btn" data-tab="history">History</button>
+      </nav>
+      <div class="header-date" id="headerDate"></div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ===== DASHBOARD TAB ===== -->
+    <section class="tab-panel active" id="tab-dashboard">
+      <div class="section-title">
+        <h1>Today's Overview</h1>
+        <p>Track your nutrition and hydration in one place.</p>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="cards-grid">
+        <div class="card card--calories">
+          <div class="card-label">Calories</div>
+          <div class="card-value" id="dashCalories">0</div>
+          <div class="card-sub">/ <span id="dashCaloriesGoal">2000</span> kcal</div>
+          <div class="ring-wrap">
+            <svg class="ring" viewBox="0 0 80 80">
+              <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+              <circle class="ring-fill ring-fill--calories" id="ringCalories" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <div class="card card--protein">
+          <div class="card-label">Protein</div>
+          <div class="card-value" id="dashProtein">0</div>
+          <div class="card-sub">/ <span id="dashProteinGoal">60</span> g</div>
+          <div class="ring-wrap">
+            <svg class="ring" viewBox="0 0 80 80">
+              <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+              <circle class="ring-fill ring-fill--protein" id="ringProtein" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <div class="card card--carbs">
+          <div class="card-label">Carbs</div>
+          <div class="card-value" id="dashCarbs">0</div>
+          <div class="card-sub">/ <span id="dashCarbsGoal">250</span> g</div>
+          <div class="ring-wrap">
+            <svg class="ring" viewBox="0 0 80 80">
+              <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+              <circle class="ring-fill ring-fill--carbs" id="ringCarbs" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <div class="card card--fat">
+          <div class="card-label">Fat</div>
+          <div class="card-value" id="dashFat">0</div>
+          <div class="card-sub">/ <span id="dashFatGoal">65</span> g</div>
+          <div class="ring-wrap">
+            <svg class="ring" viewBox="0 0 80 80">
+              <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+              <circle class="ring-fill ring-fill--fat" id="ringFat" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <div class="card card--water">
+          <div class="card-label">Water</div>
+          <div class="card-value" id="dashWater">0</div>
+          <div class="card-sub">/ <span id="dashWaterGoal">8</span> glasses</div>
+          <div class="water-visual" id="waterVisual">
+            <div class="water-fill" id="waterFill"></div>
+          </div>
+        </div>
+
+        <div class="card card--fiber">
+          <div class="card-label">Fiber</div>
+          <div class="card-value" id="dashFiber">0</div>
+          <div class="card-sub">/ <span id="dashFiberGoal">30</span> g</div>
+          <div class="ring-wrap">
+            <svg class="ring" viewBox="0 0 80 80">
+              <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+              <circle class="ring-fill ring-fill--fiber" id="ringFiber" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="213.6"></circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Macro Bar -->
+      <div class="macro-section">
+        <h2>Macro Breakdown</h2>
+        <div class="macro-bar-wrap">
+          <div class="macro-bar" id="macroBar">
+            <div class="macro-seg macro-seg--protein" id="segProtein" style="width:0%">
+              <span>Protein</span>
+            </div>
+            <div class="macro-seg macro-seg--carbs" id="segCarbs" style="width:0%">
+              <span>Carbs</span>
+            </div>
+            <div class="macro-seg macro-seg--fat" id="segFat" style="width:0%">
+              <span>Fat</span>
+            </div>
+          </div>
+        </div>
+        <div class="macro-legend">
+          <span class="legend-dot legend-dot--protein"></span>Protein
+          <span class="legend-dot legend-dot--carbs"></span>Carbs
+          <span class="legend-dot legend-dot--fat"></span>Fat
+        </div>
+      </div>
+
+      <!-- Micronutrients -->
+      <div class="micro-section">
+        <h2>Micronutrients</h2>
+        <div class="micro-grid">
+          <div class="micro-item">
+            <div class="micro-label">Vitamin C</div>
+            <div class="micro-bar-wrap">
+              <div class="micro-fill" id="microVitC" style="width:0%"></div>
+            </div>
+            <div class="micro-val"><span id="valVitC">0</span> / 90 mg</div>
+          </div>
+          <div class="micro-item">
+            <div class="micro-label">Calcium</div>
+            <div class="micro-bar-wrap">
+              <div class="micro-fill micro-fill--b" id="microCalcium" style="width:0%"></div>
+            </div>
+            <div class="micro-val"><span id="valCalcium">0</span> / 1000 mg</div>
+          </div>
+          <div class="micro-item">
+            <div class="micro-label">Iron</div>
+            <div class="micro-bar-wrap">
+              <div class="micro-fill micro-fill--c" id="microIron" style="width:0%"></div>
+            </div>
+            <div class="micro-val"><span id="valIron">0</span> / 18 mg</div>
+          </div>
+          <div class="micro-item">
+            <div class="micro-label">Sodium</div>
+            <div class="micro-bar-wrap">
+              <div class="micro-fill micro-fill--d" id="microSodium" style="width:0%"></div>
+            </div>
+            <div class="micro-val"><span id="valSodium">0</span> / 2300 mg</div>
+          </div>
+          <div class="micro-item">
+            <div class="micro-label">Potassium</div>
+            <div class="micro-bar-wrap">
+              <div class="micro-fill micro-fill--e" id="microPotassium" style="width:0%"></div>
+            </div>
+            <div class="micro-val"><span id="valPotassium">0</span> / 3500 mg</div>
+          </div>
+          <div class="micro-item">
+            <div class="micro-label">Vitamin D</div>
+            <div class="micro-bar-wrap">
+              <div class="micro-fill micro-fill--f" id="microVitD" style="width:0%"></div>
+            </div>
+            <div class="micro-val"><span id="valVitD">0</span> / 20 mcg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Tips -->
+      <div class="tip-section" id="tipSection">
+        <div class="tip-icon">💡</div>
+        <div class="tip-text" id="tipText">Log your first meal to get personalized health tips!</div>
+      </div>
+
+      <!-- Goals Settings -->
+      <div class="goals-section">
+        <h2>Daily Goals <button class="edit-goals-btn" id="editGoalsBtn">Edit</button></h2>
+        <div class="goals-form hidden" id="goalsForm">
+          <div class="goals-inputs">
+            <label>Calories <input type="number" id="goalCalories" value="2000" min="500"></label>
+            <label>Protein (g) <input type="number" id="goalProtein" value="60" min="10"></label>
+            <label>Carbs (g) <input type="number" id="goalCarbs" value="250" min="50"></label>
+            <label>Fat (g) <input type="number" id="goalFat" value="65" min="10"></label>
+            <label>Fiber (g) <input type="number" id="goalFiber" value="30" min="5"></label>
+            <label>Water (glasses) <input type="number" id="goalWater" value="8" min="1"></label>
+          </div>
+          <button class="btn-save" id="saveGoalsBtn">Save Goals</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOG FOOD TAB ===== -->
+    <section class="tab-panel" id="tab-log">
+      <div class="section-title">
+        <h1>Log a Meal</h1>
+        <p>Search from our food database or enter custom values.</p>
+      </div>
+
+      <div class="log-layout">
+        <!-- Quick Add from Database -->
+        <div class="log-search-panel">
+          <h2>Quick Add</h2>
+          <div class="search-wrap">
+            <input type="text" id="foodSearch" placeholder="Search food (e.g. apple, rice, egg)…" class="search-input">
+            <button class="search-btn" id="searchBtn">Search</button>
+          </div>
+          <div class="search-results" id="searchResults"></div>
+        </div>
+
+        <!-- Custom Entry Form -->
+        <div class="log-form-panel">
+          <h2>Custom Entry</h2>
+          <div class="form-grid">
+            <label class="form-label">
+              Food Name *
+              <input type="text" id="foodName" placeholder="e.g. Grilled Chicken" class="form-input">
+            </label>
+            <label class="form-label">
+              Meal Type
+              <select id="mealType" class="form-input">
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snack">Snack</option>
+              </select>
+            </label>
+            <label class="form-label">
+              Calories (kcal) *
+              <input type="number" id="entryCalories" placeholder="e.g. 200" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Protein (g)
+              <input type="number" id="entryProtein" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Carbs (g)
+              <input type="number" id="entryCarbs" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Fat (g)
+              <input type="number" id="entryFat" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Fiber (g)
+              <input type="number" id="entryFiber" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Vitamin C (mg)
+              <input type="number" id="entryVitC" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Calcium (mg)
+              <input type="number" id="entryCalcium" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Iron (mg)
+              <input type="number" id="entryIron" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Sodium (mg)
+              <input type="number" id="entrySodium" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Potassium (mg)
+              <input type="number" id="entryPotassium" placeholder="0" min="0" class="form-input">
+            </label>
+            <label class="form-label">
+              Vitamin D (mcg)
+              <input type="number" id="entryVitD" placeholder="0" min="0" class="form-input">
+            </label>
+          </div>
+          <button class="btn-primary" id="addFoodBtn">+ Add to Today's Log</button>
+          <div class="form-msg hidden" id="formMsg"></div>
+        </div>
+      </div>
+
+      <!-- Today's Entries -->
+      <div class="entries-section">
+        <h2>Today's Entries <span class="entry-count" id="entryCount">0 items</span></h2>
+        <div class="entries-list" id="entriesList">
+          <div class="empty-state">No food logged yet today. Start by adding a meal above!</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WATER TAB ===== -->
+    <section class="tab-panel" id="tab-water">
+      <div class="section-title">
+        <h1>Hydration Tracker</h1>
+        <p>Stay hydrated. Your body is ~60% water.</p>
+      </div>
+
+      <div class="water-layout">
+        <div class="water-big-visual">
+          <div class="water-bottle">
+            <div class="bottle-neck"></div>
+            <div class="bottle-body">
+              <div class="bottle-fill" id="bottleFill">
+                <div class="wave"></div>
+              </div>
+              <div class="bottle-marks">
+                <span>8</span><span>6</span><span>4</span><span>2</span>
+              </div>
+              <div class="bottle-pct" id="bottlePct">0%</div>
+            </div>
+          </div>
+          <div class="water-stat">
+            <span id="waterCount">0</span> / <span id="waterGoalDisp">8</span> glasses
+          </div>
+        </div>
+
+        <div class="water-controls">
+          <h2>Log Water</h2>
+          <div class="glass-btns">
+            <button class="glass-btn" data-amt="0.5">½ glass</button>
+            <button class="glass-btn" data-amt="1">1 glass</button>
+            <button class="glass-btn" data-amt="2">2 glasses</button>
+          </div>
+          <div class="custom-water">
+            <input type="number" id="customWater" min="0.5" step="0.5" placeholder="Custom amount" class="form-input">
+            <button class="btn-primary" id="addCustomWater">Add</button>
+          </div>
+          <button class="btn-danger" id="resetWater">Reset Today</button>
+
+          <div class="hydration-tips">
+            <h3>Hydration Tips</h3>
+            <ul>
+              <li>💧 Drink a glass of water first thing in the morning.</li>
+              <li>🏃 Add 1 glass per 30 min of exercise.</li>
+              <li>☕ Offset caffeinated drinks with extra water.</li>
+              <li>🍎 Eat water-rich foods like cucumbers &amp; watermelon.</li>
+              <li>⏰ Set hourly reminders to sip water.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Water Log -->
+      <div class="entries-section">
+        <h2>Today's Water Log</h2>
+        <div class="water-log-list" id="waterLogList">
+          <div class="empty-state">No water logged yet.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HISTORY TAB ===== -->
+    <section class="tab-panel" id="tab-history">
+      <div class="section-title">
+        <h1>History</h1>
+        <p>Review your past 7 days of nutrition data.</p>
+      </div>
+
+      <div class="history-chart-wrap">
+        <h2>Calories — Last 7 Days</h2>
+        <div class="bar-chart" id="historyChart"></div>
+        <div class="chart-labels" id="chartLabels"></div>
+      </div>
+
+      <div class="history-table-wrap">
+        <h2>Detailed Log</h2>
+        <div id="historyTable" class="history-table"></div>
+      </div>
+
+      <button class="btn-danger" id="clearHistoryBtn">Clear All History</button>
+    </section>
+
+  </main>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+
+
+</body></html>
